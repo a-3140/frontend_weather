@@ -1,12 +1,10 @@
 <script setup lang="ts">
-import { ref } from "vue";
 import logo from "@/assets/logo.svg";
+import { storeToRefs } from "pinia";
+import { useUser } from "@/store/user";
 
-// TODO: Move into store
-const isLoggedIn = ref(true);
-const logout = () => {
-  isLoggedIn.value = !isLoggedIn.value;
-};
+const { isUserLoggedIn } = storeToRefs(useUser());
+const { logout } = useUser();
 </script>
 
 <template>
@@ -20,7 +18,7 @@ const logout = () => {
         />
         <div
           class="px-3 text-xl capitalize text-black"
-          :class="isLoggedIn ? 'hidden sm:block' : ''"
+          :class="isUserLoggedIn ? 'hidden sm:block' : ''"
         >
           weather forecast
         </div>
@@ -30,7 +28,7 @@ const logout = () => {
           @click="logout"
           type="button"
           class="px-3 py-2 hover:bg-gray-300 text-black rounded-md outline outline-1 outline-black"
-          v-if="isLoggedIn"
+          v-if="isUserLoggedIn"
         >
           Log out
         </button>
