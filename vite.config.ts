@@ -10,6 +10,8 @@ export default defineConfig({
     target: "esnext",
   },
   resolve: {
-    alias: { "@": path.resolve(__dirname, "./src") },
+    alias: {
+      "@": path.resolve(__dirname, "./src"),
+    },
   },
 });
