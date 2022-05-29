@@ -1,4 +1,9 @@
 <script setup lang="ts">
+import { breakpointsTailwind, useBreakpoints } from "@vueuse/core";
+
+const breakpoints = useBreakpoints(breakpointsTailwind);
+
+const smAndLarger = breakpoints.greater("sm");
 defineProps<{
   reset: () => void;
   weatherData: {
@@ -13,17 +18,19 @@ defineProps<{
 </script>
 
 <template>
-  <div class="flex flex-col">
-    <div class="relative shadow-md sm:rounded-lg">
+  <div class="flex flex-col w-full container px-5">
+    <div class="relative sm:rounded-lg mx-auto">
       <table class="text-sm text-left text-gray-500">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50">
           <tr>
             <th scope="col" class="px-6 py-3">Date (mm/dd/yyyy)</th>
             <th scope="col" class="px-6 py-3">Temp (F)</th>
-            <th scope="col" class="px-6 py-3">Description</th>
-            <th scope="col" class="px-6 py-3">Main</th>
-            <th scope="col" class="px-6 py-3">Pressure</th>
-            <th scope="col" class="px-6 py-3">Humidity</th>
+            <template v-if="smAndLarger">
+              <th scope="col" class="px-6 py-3">Description</th>
+              <th scope="col" class="px-6 py-3">Main</th>
+              <th scope="col" class="px-6 py-3">Pressure</th>
+              <th scope="col" class="px-6 py-3">Humidity</th>
+            </template>
           </tr>
         </thead>
         <tbody>
@@ -35,18 +42,20 @@ defineProps<{
               {{ weatherData.date }}
             </th>
             <td class="px-6 py-4">{{ weatherData.temp }}</td>
-            <td class="px-6 py-4">
-              {{ weatherData.description }}
-            </td>
-            <td class="px-6 py-4">
-              {{ weatherData.main }}
-            </td>
-            <td class="px-6 py-4">
-              {{ weatherData.pressure }}
-            </td>
-            <td class="px-6 py-4">
-              {{ weatherData.humidity }}
-            </td>
+            <template v-if="smAndLarger">
+              <td class="px-6 py-4">
+                {{ weatherData.description }}
+              </td>
+              <td class="px-6 py-4">
+                {{ weatherData.main }}
+              </td>
+              <td class="px-6 py-4">
+                {{ weatherData.pressure }}
+              </td>
+              <td class="px-6 py-4">
+                {{ weatherData.humidity }}
+              </td>
+            </template>
           </tr>
         </tbody>
       </table>
