@@ -1,6 +1,8 @@
 <script lang="ts" setup>
-import { useUser } from "@/store/user";
-const { login } = useUser();
+import { useAuth0 } from "@auth0/auth0-vue";
+
+const { isAuthenticated } = useAuth0();
+defineProps<{ login: () => {} }>();
 </script>
 
 <template>

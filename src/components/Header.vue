@@ -1,10 +1,11 @@
 <script setup lang="ts">
 import logo from "@/assets/logo.svg";
-import { storeToRefs } from "pinia";
-import { useUser } from "@/store/user";
+import { useAuth0 } from "@auth0/auth0-vue";
 
-const { isUserLoggedIn } = storeToRefs(useUser());
-const { logout } = useUser();
+const { logout, isAuthenticated } = useAuth0();
+const handleLogout = () => {
+  logout({ returnTo: window.location.origin });
+};
 </script>
 
 <template>
@@ -18,17 +19,17 @@ const { logout } = useUser();
         />
         <div
           class="px-3 text-xl capitalize text-black"
-          :class="isUserLoggedIn ? 'hidden sm:block' : ''"
+          :class="isAuthenticated ? 'hidden sm:block' : ''"
         >
           weather forecast
         </div>
       </router-link>
       <div>
         <button
-          @click="logout"
+          @click="handleLogout"
           type="button"
           class="px-3 py-2 hover:bg-gray-300 text-black rounded-md outline outline-1 outline-black"
-          v-if="isUserLoggedIn"
+          v-if="isAuthenticated"
         >
           Log out
         </button>

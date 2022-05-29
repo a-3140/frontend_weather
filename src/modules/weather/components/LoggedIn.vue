@@ -1,17 +1,18 @@
 <script lang="ts" setup>
 import SearchForm from "@/components/SearchForm.vue";
+import { User } from "auth0";
 
 defineProps<{
-  userName: string;
-  userGithub: string;
+  user: User;
   displayWeather: () => {};
 }>();
 </script>
 
 <template>
   <div class="max-w-md mx-auto">
-    <p class="py-2">{{ userName }}</p>
-    <p class="pt-2 pb-5">{{ userGithub }}</p>
+    <p class="py-2">{{ user.nickname }}</p>
+    <p class="py-2">github.com/{{ user.nickname }}</p>
+    <!-- <p class="pt-2 pb-5">{{ userGithub }}</p> -->
     <SearchForm />
     <button
       type="button"

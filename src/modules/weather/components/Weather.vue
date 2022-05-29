@@ -23,6 +23,7 @@ defineProps<{
       <table class="text-sm text-left text-gray-500">
         <thead class="text-xs text-gray-700 uppercase bg-gray-50">
           <tr>
+            <!-- TODO: refactor table to it's own component -->
             <th scope="col" class="px-6 py-3">Date (mm/dd/yyyy)</th>
             <th scope="col" class="px-6 py-3">Temp (F)</th>
             <template v-if="smAndLarger">
