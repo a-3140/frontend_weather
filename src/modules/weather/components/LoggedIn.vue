@@ -4,6 +4,7 @@ import SearchForm from "@/components/SearchForm.vue";
 defineProps<{
   userName: string;
   userGithub: string;
+  displayWeather: () => {};
 }>();
 </script>
 
@@ -15,6 +16,7 @@ defineProps<{
     <button
       type="button"
       class="px-3 py-1 hover:bg-gray-300 rounded-sm outline outline-2 outline-black"
+      @click="displayWeather"
     >
       Display Weather
     </button>
