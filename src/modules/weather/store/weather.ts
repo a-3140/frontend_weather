@@ -1,12 +1,20 @@
 import { defineStore } from 'pinia';
 
+function getFormattedDate(date: Date) {
+  let year = date.getFullYear();
+  let month = (1 + date.getMonth()).toString().padStart(2, "0");
+  let day = date.getDate().toString().padStart(2, "0");
+
+  return month + "/" + day + "/" + year;
+}
+
 export const useWeather = defineStore({
   id: "weather",
   state: () => ({
     weatherLoading: false,
     weatherLoaded: false,
     weatherData: {
-      date: Date.now().toString(),
+      date: getFormattedDate(new Date()),
       temp: 0,
       description: "",
       main: "",
